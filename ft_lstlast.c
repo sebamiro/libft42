@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seba <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/11 11:05:26 by seba              #+#    #+#             */
-/*   Updated: 2022/08/11 11:05:27 by seba             ###   ########.fr       */
+/*   Created: 2022/08/11 17:55:35 by seba              #+#    #+#             */
+/*   Updated: 2022/08/11 18:03:36 by seba             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <string.h>
 
-size_t  ft_strlen(const char *str)
+t_list	*ft_lstlast(t_list *lst)
 {
-        size_t  i;
+        int i;
+        t_list  *temp;
 
+        temp = lst;
         i = 0;
-        while (str[i])
+        while (i < ft_lstsize(lst) - 1)
+        {
                 i++;
-        return i;
+                temp = temp->next;
+        }
+        return temp;
 }
