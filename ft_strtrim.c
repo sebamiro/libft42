@@ -6,7 +6,7 @@
 /*   By: seba <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 11:06:34 by seba              #+#    #+#             */
-/*   Updated: 2022/08/11 11:06:35 by seba             ###   ########.fr       */
+/*   Updated: 2022/08/16 16:00:43 by seba             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,27 +20,29 @@ static _Bool	ft_find(char const *set, char c)
 	while (set[i])
 	{
 		if (set[i] == c)
-			return 1;
+			return (1);
 		i++;
 	}
-	return 0;
+	return (0);
 }
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	size_t	i;
 	size_t	j;
-	int	e;
+	size_t	e;
 
 	e = 1;
 	i = 0;
-	j = ft_strlen(s1) - 1; 
+	j = ft_strlen(s1) - 1;
 	while (e && s1[i])
 	{
 		if (!ft_find(set, s1[i]))
 			e = 0;
 		i++;
 	}
+	if (i > j)
+		return ("");
 	e = 1;
 	while (e && s1[j])
 	{
@@ -50,5 +52,5 @@ char	*ft_strtrim(char const *s1, char const *set)
 	}
 	i--;
 	j++;
-	return ft_substr(s1, i, (j - i + 1));
+	return (ft_substr(s1, i, (j - i + 1)));
 }

@@ -6,7 +6,7 @@
 /*   By: seba <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 11:01:55 by seba              #+#    #+#             */
-/*   Updated: 2022/08/11 11:01:57 by seba             ###   ########.fr       */
+/*   Updated: 2022/08/16 14:49:33 by seba             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	*ft_calloc(size_t nmemb, size_t size)
 
 	total = nmemb * size;
 	res = malloc (total);
-	ft_bzero(res, total);
 	if (!res)
-		return NULL;
-	return res;
+		return (NULL);
+	ft_bzero(res, total);
+	return (res);
 }

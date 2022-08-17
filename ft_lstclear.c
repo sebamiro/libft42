@@ -6,7 +6,7 @@
 /*   By: seba <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 13:05:23 by seba              #+#    #+#             */
-/*   Updated: 2022/08/12 13:15:41 by seba             ###   ########.fr       */
+/*   Updated: 2022/08/17 09:35:33 by seba             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ void	ft_lstclear(t_list **lst, void (*del)(void*))
 	t_list	*temp;
 
 	if (!del || !lst || !*lst)
-		return;
+		return ;
 	while (lst && *lst)
 	{
-		temp = (*lst)->next;
+		temp = *lst;
+		*lst = (*lst)->next;
 		ft_lstdelone(temp, (*del));
-		*lst = temp;
 	}
 }

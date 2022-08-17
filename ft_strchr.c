@@ -6,7 +6,7 @@
 /*   By: seba <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 11:04:29 by seba              #+#    #+#             */
-/*   Updated: 2022/08/11 11:04:30 by seba             ###   ########.fr       */
+/*   Updated: 2022/08/16 15:15:59 by seba             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	while (*s && c != *s)
+	while (*s && (char)c != *s)
 		s++;
-	if (c == *s)
-		return ((char *)s); 
-	return 0;
+	if ((char)c == *s)
+		return ((char *)s);
+	return (0);
 }	

@@ -6,13 +6,13 @@
 #    By: seba <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/11 11:39:14 by seba              #+#    #+#              #
-#    Updated: 2022/08/12 14:12:23 by seba             ###   ########.fr        #
+#    Updated: 2022/08/15 22:42:02 by seba             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS	=	ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
 		ft_isascii.c ft_isdigit.c ft_isprint.c ft_itoa.c ft_memchr.c \
-	       	ft_memcpy.c ft_memcmp.c ft_memmove.c ft_memset.c ft_prutchar_fd.c \
+	       	ft_memcpy.c ft_memcmp.c ft_memmove.c ft_memset.c ft_putchar_fd.c \
 	       	ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c ft_split.c \
 	       	ft_strchr.c ft_strdup.c ft_striteri.c ft_strjoin.c ft_strlcat.c \
 	       	ft_strlcpy.c ft_strlen.c ft_strmapi.c ft_strncmp.c ft_strnstr.c \
@@ -37,10 +37,10 @@ $(NAME):	$(OBJS)
 clean:	
 	$(RM) $(NAME) $(OBJS)
 
-fclaen:	clean
+fclean:	clean
 	$(RM) $(NAME)
 
 re:	fclean $(NAME)
 
 bonus:	$(OBJS) $(BONUS_OBJS)
-	ar rcs $(NAME) $OBJS $(BONUS_OBJS)
+	ar rcs $(NAME) $(OBJS) $(BONUS_OBJS)

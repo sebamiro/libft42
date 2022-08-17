@@ -6,17 +6,17 @@
 /*   By: seba <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 11:06:52 by seba              #+#    #+#             */
-/*   Updated: 2022/08/11 11:06:54 by seba             ###   ########.fr       */
+/*   Updated: 2022/08/15 22:13:35 by seba             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int     ft_tolower(int c)
+int	ft_tolower(int c)
 {
-        if (c >= 'A' && c <= 'Z')
-        {
-                return (c + 32);
-        }
-        return c;
+	if (c >= 'A' && c <= 'Z')
+	{
+		return (c + 32);
+	}
+	return (c);
 }

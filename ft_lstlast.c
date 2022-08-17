@@ -6,7 +6,7 @@
 /*   By: seba <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 17:55:35 by seba              #+#    #+#             */
-/*   Updated: 2022/08/11 18:03:36 by seba             ###   ########.fr       */
+/*   Updated: 2022/08/15 22:25:00 by seba             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 t_list	*ft_lstlast(t_list *lst)
 {
-        int i;
-        t_list  *temp;
+	int		i;
+	t_list	*temp;
 
-        temp = lst;
-        i = 0;
-        while (i < ft_lstsize(lst) - 1)
-        {
-                i++;
-                temp = temp->next;
-        }
-        return temp;
+	temp = lst;
+	i = 0;
+	while (i < ft_lstsize(lst) - 1)
+	{
+		i++;
+		temp = temp->next;
+	}
+	return (temp);
 }

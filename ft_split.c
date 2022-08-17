@@ -6,20 +6,21 @@
 /*   By: seba <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 11:04:20 by seba              #+#    #+#             */
-/*   Updated: 2022/08/11 11:04:23 by seba             ###   ########.fr       */
+/*   Updated: 2022/08/17 10:16:57 by seba             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
-static size_t	totalPalabras(char const *s, char c)
+static size_t	totalpalabras(char const *s, char c)
 {
 	size_t	i;
 	size_t	j;
 
 	i = 0;
 	j = 0;
+	if (ft_strlen(s) == 0)
+		return (1);
 	while (s[i])
 	{
 		if (s[i] == c)
@@ -34,18 +35,40 @@ static size_t	totalPalabras(char const *s, char c)
 	return (j + 2);
 }
 
-static size_t	totalLetras(char const *s, size_t *j, char c)
+static size_t	totalletras(char const *s, size_t *j, char c)
 {
 	size_t	i;
 	size_t	m;
-	
+
 	m = *j;
 	while (s[*j] != c && s[*j])
 		*j = *j + 1;
 	i = *j - m;
 	while (s[*j] == c)
 		*j = *j + 1;
-	return i;
+	return (i);
+}
+
+static void	protect(int i, char **str)
+{
+	int	j;
+
+	j = 0;
+	while (j <= i)
+	{
+		free(str[j]);
+		j++;
+	}
+	free(str);
+}
+
+static char	*trim(const char *s, char c)
+{
+	char	c2[2];
+
+	c2[0] = c;
+	c2[1] = '\0';
+	return (ft_strtrim(s, c2));
 }
 
 char	**ft_split(char const *s, char c)
@@ -58,27 +81,20 @@ char	**ft_split(char const *s, char c)
 
 	j = 0;
 	i = 0;
-	s2 = ft_strtrim(s, (char*)ft_calloc(2, sizeof(char*)));
-	str = ft_calloc(totalPalabras(s2, c), sizeof(char*));
+	s2 = trim(s, c);
+	str = ft_calloc(totalpalabras(s2, c), sizeof(char *));
 	if (!str)
-		return NULL;
-	while (i < totalPalabras(s2, c) - 1)
+		return (NULL);
+	while (i < totalpalabras(s2, c) - 1)
 	{
 		t = j;
-		str[i] = ft_substr(s2, t, totalLetras(s2, &j, c));
-		printf("%li %li %li %s %s\n", i, t, j, str[0], str[i]); 
-		if (str[i] == NULL)
+		str[i] = ft_substr(s2, t, totalletras(s2, &j, c));
+		if (!str[i])
 		{
-			if (i == 0)
-				return NULL;
-			while (i)
-			{
-				free(str[i]);
-				i--;
-			}
-			return NULL;
+			protect((int)i, str);
+			return (NULL);
 		}
 		i++;
-	}	
-	return str;
+	}
+	return (str);
 }

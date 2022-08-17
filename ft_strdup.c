@@ -6,7 +6,7 @@
 /*   By: seba <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 11:04:36 by seba              #+#    #+#             */
-/*   Updated: 2022/08/11 11:04:38 by seba             ###   ########.fr       */
+/*   Updated: 2022/08/16 15:23:21 by seba             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ char	*ft_strdup(const char *s)
 	size_t	len;
 
 	len = ft_strlen(s);
-	str = (char*)ft_calloc(len, 1);
+	str = (char *)ft_calloc(len + 1, 1);
 	if (!str)
 		return (NULL);
-	return memcpy(str, s, len);
+	return (ft_memcpy(str, s, len));
 }

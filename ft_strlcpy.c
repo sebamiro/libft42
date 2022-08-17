@@ -6,7 +6,7 @@
 /*   By: seba <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 11:05:17 by seba              #+#    #+#             */
-/*   Updated: 2022/08/11 11:05:21 by seba             ###   ########.fr       */
+/*   Updated: 2022/08/16 13:31:12 by seba             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 
 size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 {
-	size_t	lenSrc;
+	size_t	lensrc;
 	size_t	i;
 
-	lenSrc = ft_strlen(src);
+	lensrc = ft_strlen(src);
+	if (size == 0)
+		return (lensrc);
 	i = 0;
 	while (i < size - 1 && src[i])
 	{
@@ -26,5 +28,5 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 		i++;
 	}
 	dest[i] = '\0';
-	return lenSrc;
+	return (lensrc);
 }

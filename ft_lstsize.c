@@ -6,7 +6,7 @@
 /*   By: seba <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 17:49:25 by seba              #+#    #+#             */
-/*   Updated: 2022/08/11 17:51:33 by seba             ###   ########.fr       */
+/*   Updated: 2022/08/15 22:27:47 by seba             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_lstsize(t_list *lst)
 {
-	int i;
+	int		i;
 	t_list	*temp;
 
 	temp = lst;
@@ -24,5 +24,5 @@ int	ft_lstsize(t_list *lst)
 		i++;
 		temp = temp->next;
 	}
-	return i;
+	return (i);
 }

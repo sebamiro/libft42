@@ -6,15 +6,15 @@
 /*   By: seba <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 11:02:21 by seba              #+#    #+#             */
-/*   Updated: 2022/08/11 11:02:22 by seba             ###   ########.fr       */
+/*   Updated: 2022/08/12 21:25:58 by seba             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int     ft_isascii(int c)
+int	ft_isascii(int c)
 {
-        if (c >= 0 && c <= 127)
-                return 2048;
-        return 0;
+	if (c >= 0 && c <= 127)
+		return (2048);
+	return (0);
 }

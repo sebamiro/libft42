@@ -6,7 +6,7 @@
 /*   By: seba <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 11:04:05 by seba              #+#    #+#             */
-/*   Updated: 2022/08/11 11:04:06 by seba             ###   ########.fr       */
+/*   Updated: 2022/08/15 22:20:18 by seba             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	ft_putnbr_fd(int n, int fd)
 	}
 	else if (n > 9)
 	{
-		ft_putnbr_fd(n/10, fd);
-		ft_putnbr_fd(n%10, fd);
+		ft_putnbr_fd(n / 10, fd);
+		ft_putnbr_fd(n % 10, fd);
 	}
 	else
 		ft_putchar_fd(n + '0', fd);
