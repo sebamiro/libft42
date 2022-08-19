@@ -6,7 +6,7 @@
 /*   By: seba <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 13:27:39 by seba              #+#    #+#             */
-/*   Updated: 2022/08/17 09:38:57 by seba             ###   ########.fr       */
+/*   Updated: 2022/08/19 11:22:15 by seba             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	while (temp)
 	{
 		new = ft_lstnew((*f)(lst->content));
-		if (!(new))
+		if (!new)
 		{
-			ft_lstclear(&head, del);
+			ft_lstclear(&head, (*del);
 			return (NULL);
 		}
 		ft_lstadd_back(&head, new);
