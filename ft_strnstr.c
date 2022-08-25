@@ -6,7 +6,7 @@
 /*   By: seba <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 11:06:11 by seba              #+#    #+#             */
-/*   Updated: 2022/08/16 14:03:49 by seba             ###   ########.fr       */
+/*   Updated: 2022/08/24 22:36:05 by seba             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ char	*ft_strnstr(const char *big, const char *little, size_t n)
 				i++;
 				j++;
 			}
-			if (little[j] != '\0')
-				j = 0;
-			else
+			if (!little[j])
 				return ((char *)(big + (i - j)));
+			i = i - j;
+			j = 0;
 		}
 		i++;
 	}	

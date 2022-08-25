@@ -6,7 +6,7 @@
 /*   By: seba <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 11:04:20 by seba              #+#    #+#             */
-/*   Updated: 2022/08/18 13:53:04 by seba             ###   ########.fr       */
+/*   Updated: 2022/08/19 12:28:07 by seba             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,6 @@ static void	protect(int i, char **str)
 	free(str);
 }
 
-static char	*trim(const char *s, char c)
-{
-	char	c2[2];
-
-	c2[0] = c;
-	c2[1] = '\0';
-	return (ft_strtrim(s, c2));
-}
-
 char	**ft_split(char const *s, char c)
 {
 	char	**str;
@@ -84,7 +75,7 @@ char	**ft_split(char const *s, char c)
 
 	j = 0;
 	i = 0;
-	s2 = trim(s, c);
+	s2 = ft_strtrim(s, &c);
 	str = ft_calloc(totalpalabras(s2, c), sizeof(char *));
 	if (!str)
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: seba <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 18:07:21 by seba              #+#    #+#             */
-/*   Updated: 2022/08/17 09:27:31 by seba             ###   ########.fr       */
+/*   Updated: 2022/08/25 11:12:45 by seba             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,5 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	{
 		temp = ft_lstlast(*lst);
 		temp->next = new;
-		new->next = NULL;
 	}
 }

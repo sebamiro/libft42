@@ -6,7 +6,7 @@
 /*   By: seba <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 11:06:34 by seba              #+#    #+#             */
-/*   Updated: 2022/08/16 16:00:43 by seba             ###   ########.fr       */
+/*   Updated: 2022/08/25 11:04:57 by seba             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 		i++;
 	}
 	if (i > j)
-		return ("");
+		return (ft_substr(s1, i, (j - i + 1)));
 	e = 1;
 	while (e && s1[j])
 	{
