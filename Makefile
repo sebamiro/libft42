@@ -6,7 +6,7 @@
 #    By: smiro <smiro@student.42barcelona>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/11 15:23:29 by smiro             #+#    #+#              #
-#    Updated: 2023/03/30 21:43:05 by smiro            ###   ########.fr        #
+#    Updated: 2023/04/15 20:00:59 by smiro            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,6 @@ MAKE		= make --no-print-directory
 
 NAME		= libft.a
 INC			= ./inc/
-INC_HEADER	= $(INC)*.h
 
 SRC_DIR		= src/
 OBJ_DIR		= obj/
@@ -29,11 +28,11 @@ AR			= ar rcs
 
 ################################################################################
 
-SRC_FILES	=	$(basename $(notdir $(wildcard $(SRC_DIR)*.c)))
+SRC_LIST	:=	$(shell find $(SRC_DIR:/=) -type d)
 
-SRC			=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
-OBJ 		=	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
-DEP 		=	$(patsubst $(SRC_DIR)%, $(DEP_DIR)%, $(SRCS:.c=.d))
+SRC			:=	$(shell find $(SRC_DIR:/=) -name '*.c')
+OBJ 		=	$(patsubst $(SRC_DIR)%, $(OBJ_DIR)%, $(SRC:.c=.o))
+DEP 		=	$(patsubst $(SRC_DIR)%, $(DEP_DIR)%, $(SRC:.c=.d))
 
 ################################################################################
 
@@ -41,27 +40,30 @@ all:
 			@$(MAKE) $(NAME)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c Makefile
-			@printf "\rcompiling.. $(notdir $(basename $<))%20c"
+			@printf "\rcompiling.. $(notdir $<)%20c"
 			@$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME)::	$(OBJ_DIR) $(DEP_DIR) $(OBJ)
 			@$(AR) $(NAME) $(OBJ)
-			@echo "\nDONE"
+			@printf "\r$(basename $@): done%20c\n"
 
 $(OBJ_DIR):
-			@mkdir -p $@
+			@mkdir $(patsubst $(SRC_DIR:/=)%, $(@:/=)%, $(SRC_LIST))
+			@echo "creating.. $@"
 
 $(DEP_DIR):
-			@mkdir -p $@
+			@mkdir $(patsubst $(SRC_DIR:/=)%, $(@:/=)%, $(SRC_LIST))
+			@echo "creating.. $@"
 
 clean:
 			@$(RM) $(OBJ_DIR) $(DEP_DIR)
-			@echo "$(OBJ_DIR) $(DEP_DIR) removed"
+			@echo "removing.. $(OBJ_DIR)"
+			@echo "removing.. $(DEP_DIR)"
 
 fclean:
 			@$(MAKE) clean
 			@$(RM) $(NAME)
-			@echo "$(NAME) removed"
+			@echo "removing.. $(NAME)"
 
 re:
 			@$(MAKE) fclean
