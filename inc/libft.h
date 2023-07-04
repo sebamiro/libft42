@@ -111,4 +111,6 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
+int		ft_printf(char *str, ...);
+
 #endif

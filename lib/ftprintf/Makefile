@@ -14,13 +14,12 @@
 
 MAKE		= make --no-print-directory
 
-NAME		= libft.a
+NAME		= libftprintf.a
 INC			= ./inc/
 
 SRC_DIR		= src/
 OBJ_DIR		= obj/
 DEP_DIR		= dep/
-LIB_DIR		= lib/
 
 CFLAGS		= -I $(INC) -MMD -MP -MF $(DEP_DIR)$*.d -Wall -Werror -Wextra
 RM			= rm -rf
@@ -30,26 +29,23 @@ AR			= ar rcs
 ################################################################################
 
 SRC_LIST	:=	$(shell find $(SRC_DIR:/=) -type d)
-LIB_LIST	:=	$(wildcard $(LIB_DIR)*)
 
 SRC			:=	$(shell find $(SRC_DIR:/=) -name '*.c')
 OBJ 		=	$(patsubst $(SRC_DIR)%, $(OBJ_DIR)%, $(SRC:.c=.o))
 DEP 		=	$(patsubst $(SRC_DIR)%, $(DEP_DIR)%, $(SRC:.c=.d))
-LIB_OBJ		=	$(foreach lib, $(LIB_LIST), $(wildcard $(lib)/obj/*))
 
 ################################################################################
 
 all:
-			@$(foreach lib, $(LIB_LIST), make -C $(lib))
 			@$(MAKE) $(NAME)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c Makefile
-			@printf "compiling.. $(notdir $<)\n"
+			@printf "compiling.. $(notdir $<)%20c\n"
 			@$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME)::	$(OBJ_DIR) $(DEP_DIR) $(OBJ)
-			@$(AR) $(NAME) $(OBJ) $(LIB_OBJ)
-			@printf "$(basename $@): done\n"
+			@$(AR) $(NAME) $(OBJ)
+			@printf "$(basename $@): done%20c\n"
 
 $(OBJ_DIR):
 			@mkdir $(patsubst $(SRC_DIR:/=)%, $(@:/=)%, $(SRC_LIST))
@@ -60,13 +56,12 @@ $(DEP_DIR):
 			@echo "creating.. $@"
 
 clean:
-			@$(foreach lib, $(LIB_LIST), make clean -C $(lib))
 			@$(RM) $(OBJ_DIR) $(DEP_DIR)
+			@$(RM) $(NAME)
 			@echo "removing.. $(OBJ_DIR)"
 			@echo "removing.. $(DEP_DIR)"
 
 fclean:
-			@$(foreach lib, $(LIB_LIST), make fclean -C $(lib))
 			@$(MAKE) clean
 			@$(RM) $(NAME)
 			@echo "removing.. $(NAME)"
