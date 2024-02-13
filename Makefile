@@ -1,75 +1,51 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: smiro <smiro@student.42barcelona>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/11/11 15:23:29 by smiro             #+#    #+#              #
-#    Updated: 2023/04/15 20:00:59 by smiro            ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+#
+# smiro
+# Makefile
+# 2024-02
+#
 
 ################################################################################
 
 MAKE		= make --no-print-directory
-
 NAME		= libft.a
-INC			= ./inc/
 
 SRC_DIR		= src/
-OBJ_DIR		= obj/
-DEP_DIR		= dep/
+BUILD_DIR	= build/
 LIB_DIR		= lib/
 
-CFLAGS		= -I $(INC) -MMD -MP -MF $(DEP_DIR)$*.d -Wall -Werror -Wextra
+-include $(SRC_DIR)src.mk
+
+CFLAGS		= -I ./$(SRC_DIR) -MMD -MP -MF $(BUILD_DIR)$*.d -Wall -Werror -Wextra -O3
 RM			= rm -rf
 CC			= gcc
 AR			= ar rcs
 
 ################################################################################
 
-SRC_LIST	:=	$(shell find $(SRC_DIR:/=) -type d)
-LIB_LIST	:=	$(wildcard $(LIB_DIR)*)
-
-SRC			:=	$(shell find $(SRC_DIR:/=) -name '*.c')
-OBJ 		=	$(patsubst $(SRC_DIR)%, $(OBJ_DIR)%, $(SRC:.c=.o))
-DEP 		=	$(patsubst $(SRC_DIR)%, $(DEP_DIR)%, $(SRC:.c=.d))
-LIB_OBJ		=	$(foreach lib, $(LIB_LIST), $(wildcard $(lib)/obj/*))
+SRC			= 	$(addprefix $(SRC_DIR), $(SRC_FILES))
+OBJ 		=	$(patsubst $(SRC_DIR)%, $(BUILD_DIR)%, $(SRC:.c=.o))
+DEP 		=	$(patsubst $(SRC_DIR)%, $(BUILD_DIR)%, $(SRC:.c=.d))
 
 ################################################################################
 
 all:
-			@$(foreach lib, $(LIB_LIST), make -C $(lib))
+			@$(MAKE) -sC $(LIB_DIR)ftprintf
 			@$(MAKE) $(NAME)
 
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c Makefile
-			@printf "compiling.. $(notdir $<)\n"
-			@$(CC) $(CFLAGS) -c $< -o $@
+$(BUILD_DIR)%.o: $(SRC_DIR)%.c Makefile
+			@mkdir -p $(@D)
+			$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME)::	$(OBJ_DIR) $(DEP_DIR) $(OBJ)
-			@$(AR) $(NAME) $(OBJ) $(LIB_OBJ)
-			@printf "$(basename $@): done\n"
-
-$(OBJ_DIR):
-			@mkdir $(patsubst $(SRC_DIR:/=)%, $(@:/=)%, $(SRC_LIST))
-			@echo "creating.. $@"
-
-$(DEP_DIR):
-			@mkdir $(patsubst $(SRC_DIR:/=)%, $(@:/=)%, $(SRC_LIST))
-			@echo "creating.. $@"
+$(NAME)::	$(OBJ)
+			@$(AR) $(NAME) $(OBJ) $(LIB_DIR)ftprintf/libftprintf.a
 
 clean:
-			@$(foreach lib, $(LIB_LIST), make clean -C $(lib))
-			@$(RM) $(OBJ_DIR) $(DEP_DIR)
-			@echo "removing.. $(OBJ_DIR)"
-			@echo "removing.. $(DEP_DIR)"
+			@$(MAKE) $@ -sC $(LIB_DIR)ftprintf
+			$(RM) $(BUILD_DIR)
 
-fclean:
-			@$(foreach lib, $(LIB_LIST), make fclean -C $(lib))
-			@$(MAKE) clean
-			@$(RM) $(NAME)
-			@echo "removing.. $(NAME)"
+fclean: 	clean
+			@$(MAKE) $@ -sC $(LIB_DIR)ftprintf
+			$(RM) $(NAME)
 
 re:
 			@$(MAKE) fclean
